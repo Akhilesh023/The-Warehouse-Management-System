@@ -22,7 +22,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	@PostMapping("/superadmin")
+	@PostMapping("/register")
 	public ResponseEntity<ResponseStructure<AdminResponse>> addSuperAdmin(@RequestBody @Valid AdminRequest adminRequest){
 		return adminService.addSuperAdmin(adminRequest);
 	}

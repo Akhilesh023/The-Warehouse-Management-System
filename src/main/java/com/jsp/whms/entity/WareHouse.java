@@ -1,6 +1,5 @@
 package com.jsp.whms.entity;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +22,7 @@ public class WareHouse {
 	private int wareHouseId;
 	private String name;
 	
-	@OneToOne(mappedBy = "wareHouse")
+	@OneToOne
 	private Admin admin;
 
 }

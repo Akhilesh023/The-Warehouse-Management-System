@@ -2,6 +2,7 @@ package com.jsp.whms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,9 @@ public class AdminController {
 		return adminService.addSuperAdmin(adminRequest);
 	}
 	
-	@PostMapping("/admins")
-	public ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(@RequestBody AdminRequest adminRequest){
-		return adminService.addAdmin(adminRequest);
+	@PostMapping("/warehouses/{warehouseId}/admins")
+	public ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(@RequestBody AdminRequest adminRequest,@PathVariable int wareHouseId){
+		return adminService.addAdmin(adminRequest,wareHouseId);
 	}
 	
 	

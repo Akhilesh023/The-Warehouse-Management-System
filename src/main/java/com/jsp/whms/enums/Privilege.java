@@ -16,5 +16,7 @@ public enum Privilege {
 	DELETE_ADDRESS,
 	DELETE_STORAGE,
 	
+	
+	
 }
 		

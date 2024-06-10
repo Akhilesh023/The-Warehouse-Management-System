@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -46,6 +47,16 @@ public class ApplicationExceptionHandler {
 		es.setRootcause("Illegal Operations occured Super Admin Already Exists");
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.FORBIDDEN);
+	}
+	
+	public ResponseEntity<ErrorStructure> handleUsernameNotFound(UsernameNotFoundException e){
+		ErrorStructure es = new ErrorStructure();
+		
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		es.setMessage(e.getMessage());
+		es.setRootcause("The admin username does not exist");
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}
 
 }

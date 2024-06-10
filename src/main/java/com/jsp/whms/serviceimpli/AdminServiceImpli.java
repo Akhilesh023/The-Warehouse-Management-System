@@ -72,6 +72,12 @@ public class AdminServiceImpli implements AdminService {
 		
 		
 	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(AdminRequest adminRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

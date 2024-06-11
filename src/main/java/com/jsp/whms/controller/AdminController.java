@@ -28,7 +28,7 @@ public class AdminController {
 		return adminService.addSuperAdmin(adminRequest);
 	}
 	
-	@PostMapping("/warehouses/{warehouseId}/admins")
+	@PostMapping("/warehouses/{wareHouseId}/admins")
 	public ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(@RequestBody AdminRequest adminRequest,@PathVariable int wareHouseId){
 		return adminService.addAdmin(adminRequest,wareHouseId);
 	}

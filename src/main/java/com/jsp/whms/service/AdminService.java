@@ -1,5 +1,7 @@
 package com.jsp.whms.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.jsp.whms.entity.Admin;
@@ -18,6 +20,10 @@ public interface AdminService {
 	ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(AdminRequest adminRequest);
 
 	ResponseEntity<ResponseStructure<AdminResponse>> updateAdminBySuperAdmin(AdminRequest adminRequest, int adminId);
+
+	ResponseEntity<ResponseStructure<AdminResponse>> findByAdminId(int adminId);
+
+	ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllAdmin();
 
 	
 

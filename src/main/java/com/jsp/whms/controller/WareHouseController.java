@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jsp.whms.entity.WareHouse;
+import com.jsp.whms.repository.WareHouseRepository;
 import com.jsp.whms.requestdto.WareHouseRequest;
 import com.jsp.whms.responsedto.WareHouseResponse;
 import com.jsp.whms.service.WareHouseService;
@@ -35,8 +36,18 @@ public class WareHouseController {
 	@PutMapping("/warehouses/{wareHouseId}")
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(@RequestBody WareHouseRequest wareHouseRequest, @PathVariable int wareHouseId){
 		return wareHouseService.updateWareHouse(wareHouseRequest,wareHouseId);
+	}
+	
+	@GetMapping("/warehouses/{wareHouseId}")
+	public ResponseEntity<ResponseStructure<WareHouseResponse>> findByWarehouseId(@PathVariable int wareHouseId){
+		
+		return wareHouseService.findByWarehouseId(wareHouseId);
+		
+		
 		
 	}
+	
+	
 	
 	
 

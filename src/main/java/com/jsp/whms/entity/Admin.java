@@ -31,6 +31,5 @@ public class Admin {
 	private String password;
 	private AdminType adminType;
 	
-	@OneToOne
-	private WareHouse wareHouse;
+	
 }

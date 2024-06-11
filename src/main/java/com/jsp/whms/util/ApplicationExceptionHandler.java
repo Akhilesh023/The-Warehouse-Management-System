@@ -13,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.jsp.whms.exception.AdminNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
 import com.jsp.whms.exception.WarehouseNotFoundByIdException;
 
@@ -65,6 +66,15 @@ public class ApplicationExceptionHandler {
 		es.setStatus(HttpStatus.NOT_FOUND.value());
 		es.setMessage(e.getMessage());
 		es.setRootcause("The WareHouse Id does not exists");
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	
+	public ResponseEntity<ErrorStructure> handleAdminNotFoundById(AdminNotFoundByIdException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		es.setMessage(e.getMessage());
+		es.setRootcause("The requested ID does not exists");
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}

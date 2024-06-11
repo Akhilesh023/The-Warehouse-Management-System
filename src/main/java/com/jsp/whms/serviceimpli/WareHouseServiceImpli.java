@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.jsp.whms.entity.WareHouse;
+import com.jsp.whms.exception.WarehouseNotFoundByIdException;
 import com.jsp.whms.mapper.WareHouseMapper;
 import com.jsp.whms.repository.WareHouseRepository;
 import com.jsp.whms.requestdto.WareHouseRequest;
@@ -34,12 +35,23 @@ public class WareHouseServiceImpli implements WareHouseService {
 						.setStatus(HttpStatus.CREATED.value())
 						.setMessage("WareHouse Details are added")
 						.setData(wareHouseMapper.mapToWareHouseResponse(wareHouse)));
-		
-		
-		
+	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(WareHouseRequest wareHouseRequest, int wareHouseId) {
 		
-
+		return wareHouseRepository.findById(wareHouseId).map(wareHouse -> {
+			
+			wareHouse = wareHouseRepository.save(wareHouseMapper.mapToWareHouse(wareHouseRequest, wareHouse));
+			
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseStructure<WareHouseResponse>()
+							.setStatus(HttpStatus.OK.value())
+							.setMessage("Ware House Updated")
+							.setData(wareHouseMapper.mapToWareHouseResponse(wareHouse)));
+			
+		}).orElseThrow(() -> new WarehouseNotFoundByIdException("Failed to update the warehouse"));
+		
 		
 	}
 

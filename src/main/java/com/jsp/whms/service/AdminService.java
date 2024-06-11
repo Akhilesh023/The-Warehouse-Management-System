@@ -15,6 +15,10 @@ public interface AdminService {
 
 	ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(AdminRequest adminRequest,int wareHouseId);
 
+	ResponseEntity<ResponseStructure<AdminResponse>> updateAdmin(AdminRequest adminRequest);
+
+	ResponseEntity<ResponseStructure<AdminResponse>> updateAdminBySuperAdmin(AdminRequest adminRequest, int adminId);
+
 	
 
 }

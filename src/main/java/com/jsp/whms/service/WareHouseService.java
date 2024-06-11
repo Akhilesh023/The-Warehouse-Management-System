@@ -11,6 +11,6 @@ import com.jsp.whms.util.ResponseStructure;
 
 public interface WareHouseService {
 
-	ResponseEntity<ResponseStructure<WareHouseResponse>> addWareHouse();
+	ResponseEntity<ResponseStructure<WareHouseResponse>> addWareHouse(WareHouseRequest wareHouseRequest);
 
 }

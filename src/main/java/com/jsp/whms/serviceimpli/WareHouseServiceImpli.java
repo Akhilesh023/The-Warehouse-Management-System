@@ -55,4 +55,19 @@ public class WareHouseServiceImpli implements WareHouseService {
 		
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<WareHouseResponse>> findByWarehouseId(int wareHouseId) {
+		
+		return wareHouseRepository.findById(wareHouseId).map(warehouse -> {
+			
+			return ResponseEntity.status(HttpStatus.FOUND)
+					.body(new ResponseStructure<WareHouseResponse>()
+							.setStatus(HttpStatus.FOUND.value())
+							.setMessage("WareHouse Found!!!!!")
+							.setData(wareHouseMapper.mapToWareHouseResponse(warehouse)));
+			
+		}).orElseThrow(() -> new WarehouseNotFoundByIdException("WareHouse Not Found for the ID"));
+		
+	} 
+
 }

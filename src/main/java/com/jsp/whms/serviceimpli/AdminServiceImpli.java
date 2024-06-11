@@ -156,6 +156,39 @@ public class AdminServiceImpli implements AdminService {
 		
 		
 	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> findByAdminId(int adminId) {
+		
+		
+		return adminRepository.findById(adminId).map(admin -> {
+			
+			return ResponseEntity.status(HttpStatus.FOUND)
+					.body(new ResponseStructure<AdminResponse>()
+							.setStatus(HttpStatus.FOUND.value())
+							.setMessage("User Found!!!!!")
+							.setData(adminMapper.mapToAdminResponse(admin)));
+
+		}).orElseThrow( () -> new AdminNotFoundByIdException("User not found for the given ID"));
+		
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<AdminResponse>>> findAllAdmin() {
+		
+		List<AdminResponse> admins = adminRepository.findAll().stream().map(admin -> 
+		adminMapper.mapToAdminResponse(admin))
+		.toList();
+		
+		return ResponseEntity.status(HttpStatus.FOUND)
+				.body(new ResponseStructure<List<AdminResponse>>()
+						.setData(admins)
+						.setMessage("Users Found")
+						.setStatus(HttpStatus.FOUND.value()));
+		
+	}
+	
+	
 	
 	
 	

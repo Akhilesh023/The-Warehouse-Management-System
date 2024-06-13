@@ -13,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.jsp.whms.exception.AddressNotFoundByIdException;
 import com.jsp.whms.exception.AdminNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
 import com.jsp.whms.exception.WarehouseNotFoundByIdException;
@@ -50,7 +51,7 @@ public class ApplicationExceptionHandler {
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.FORBIDDEN);
 	}
-	
+	@ExceptionHandler
 	public ResponseEntity<ErrorStructure> handleUsernameNotFound(UsernameNotFoundException e){
 		ErrorStructure es = new ErrorStructure();
 		
@@ -60,7 +61,7 @@ public class ApplicationExceptionHandler {
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}
-	
+	@ExceptionHandler
 	public ResponseEntity<ErrorStructure> handleWarehouseNotFoundById(WarehouseNotFoundByIdException e){
 		ErrorStructure es = new ErrorStructure();
 		es.setStatus(HttpStatus.NOT_FOUND.value());
@@ -69,12 +70,21 @@ public class ApplicationExceptionHandler {
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}
-	
+	@ExceptionHandler
 	public ResponseEntity<ErrorStructure> handleAdminNotFoundById(AdminNotFoundByIdException e){
 		ErrorStructure es = new ErrorStructure();
 		es.setStatus(HttpStatus.NOT_FOUND.value());
 		es.setMessage(e.getMessage());
 		es.setRootcause("The requested ID does not exists");
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleAddressNotFoundById(AddressNotFoundByIdException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		es.setRootcause("The requested Id does not exist");
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}

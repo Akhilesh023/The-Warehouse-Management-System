@@ -1,5 +1,7 @@
 package com.jsp.whms.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,10 @@ public interface WareHouseService {
 
 	ResponseEntity<ResponseStructure<WareHouseResponse>> addWareHouse(WareHouseRequest wareHouseRequest);
 
-	ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(WareHouseRequest wareHouseRequest,
-			int wareHouseId);
+	ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(WareHouseRequest wareHouseRequest, int wareHouseId);
 
 	ResponseEntity<ResponseStructure<WareHouseResponse>> findByWarehouseId(int wareHouseId);
+
+	ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findAllWareHouses();
 
 }

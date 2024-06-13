@@ -1,6 +1,8 @@
 package com.jsp.whms.serviceimpli;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +69,23 @@ public class WareHouseServiceImpli implements WareHouseService {
 							.setData(wareHouseMapper.mapToWareHouseResponse(warehouse)));
 			
 		}).orElseThrow(() -> new WarehouseNotFoundByIdException("WareHouse Not Found for the ID"));
+		
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findAllWareHouses() {
+		
+		List<WareHouseResponse> wareHouses = wareHouseRepository.findAll().stream().map(warehouse -> 
+		wareHouseMapper.mapToWareHouseResponse(warehouse))
+		.toList();
+
+		return ResponseEntity.status(HttpStatus.FOUND)
+				.body(new ResponseStructure<List<WareHouseResponse>>()
+						.setData(wareHouses)
+						.setMessage("WareHouses found")
+						.setStatus(HttpStatus.FOUND.value()));
+		
+		
 		
 	} 
 

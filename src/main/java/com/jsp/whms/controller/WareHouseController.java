@@ -1,5 +1,7 @@
 package com.jsp.whms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,9 +44,11 @@ public class WareHouseController {
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> findByWarehouseId(@PathVariable int wareHouseId){
 		
 		return wareHouseService.findByWarehouseId(wareHouseId);
-		
-		
-		
+	}
+	
+	@GetMapping("/warehouses")
+	public ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findAllWareHouses(){
+		return wareHouseService.findAllWareHouses();
 	}
 	
 	

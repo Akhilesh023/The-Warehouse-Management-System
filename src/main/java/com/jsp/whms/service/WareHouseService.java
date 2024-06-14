@@ -21,4 +21,6 @@ public interface WareHouseService {
 
 	ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findAllWareHouses();
 
+	ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findWareHouseByCity(String city);
+
 }

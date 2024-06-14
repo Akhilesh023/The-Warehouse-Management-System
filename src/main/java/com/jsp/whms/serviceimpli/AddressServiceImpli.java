@@ -36,6 +36,7 @@ public class AddressServiceImpli implements AddressService {
 			Address address = addressMapper.mapToAddress(addressRequest, new Address());
 			
 			address.setWareHouse(warehouse);
+			//warehouse.setAddress(address); //.
 			address = addressRepository.save(address);
 			
 			return ResponseEntity.status(HttpStatus.OK)
@@ -44,8 +45,6 @@ public class AddressServiceImpli implements AddressService {
 							.setStatus(HttpStatus.OK.value())
 							.setMessage("Address Created !!!!!!!!!!"));
 		}).orElseThrow(() -> new WarehouseNotFoundByIdException("No WareHouse Id Found"));
-		
-		
 		
 		
 	}

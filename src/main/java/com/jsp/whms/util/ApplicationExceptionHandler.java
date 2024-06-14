@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.jsp.whms.exception.AddressNotFoundByIdException;
 import com.jsp.whms.exception.AdminNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
+import com.jsp.whms.exception.StorageNotFoundByIdException;
+import com.jsp.whms.exception.WareHouseNotFoundInCityException;
 import com.jsp.whms.exception.WarehouseNotFoundByIdException;
 
 @RestControllerAdvice
@@ -87,6 +89,27 @@ public class ApplicationExceptionHandler {
 		es.setRootcause("The requested Id does not exist");
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleStorageNotFoundById(StorageNotFoundByIdException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		es.setRootcause("The requested Id does not exist");
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleWareHouseNotFoundInCity(WareHouseNotFoundInCityException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		es.setRootcause("The Required Id Does not exist");
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+		
+		
 	}
 
 }

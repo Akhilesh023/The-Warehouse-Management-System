@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.jsp.whms.entity.WareHouse;
+import com.jsp.whms.exception.WareHouseNotFoundInCityException;
 import com.jsp.whms.exception.WarehouseNotFoundByIdException;
 import com.jsp.whms.mapper.WareHouseMapper;
+import com.jsp.whms.repository.AddressRepository;
 import com.jsp.whms.repository.WareHouseRepository;
 import com.jsp.whms.requestdto.WareHouseRequest;
 import com.jsp.whms.responsedto.WareHouseResponse;
@@ -25,11 +27,15 @@ public class WareHouseServiceImpli implements WareHouseService {
 	 
 	@Autowired
 	private WareHouseMapper wareHouseMapper;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Override
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> addWareHouse(WareHouseRequest wareHouseRequest) {
 		
 		WareHouse wareHouse = wareHouseMapper.mapToWareHouse(wareHouseRequest, new WareHouse());
+		wareHouse.setTotalCapacityInKg(0);
 		wareHouse = wareHouseRepository.save(wareHouse);
 		
 		return ResponseEntity.status(HttpStatus.CREATED)
@@ -84,9 +90,25 @@ public class WareHouseServiceImpli implements WareHouseService {
 						.setData(wareHouses)
 						.setMessage("WareHouses found")
 						.setStatus(HttpStatus.FOUND.value()));
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<WareHouseResponse>>> findWareHouseByCity(String city) {
+				
 		
+		List<WareHouseResponse> list = addressRepository.findByCity(city).stream().map(address -> 
+		wareHouseMapper.mapToWareHouseResponse(address.getWareHouse(), address)).toList();
 		
+		if(list.isEmpty()) {
+			throw new WareHouseNotFoundInCityException("WareHouse Not Found");
+		}
 		
+		return ResponseEntity.status(HttpStatus.FOUND)
+				.body(new ResponseStructure<List<WareHouseResponse>>()
+						.setMessage("WareHouse FOund")
+						.setData(list)
+						.setStatus(HttpStatus.FOUND.value()));
 	} 
 
 }
+ 

@@ -1,7 +1,9 @@
 package com.jsp.whms.responsedto;
 
-import com.jsp.whms.entity.Address;
+import java.util.List;
+
 import com.jsp.whms.enums.AdminType;
+import com.jsp.whms.enums.MaterialTypes;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,13 +16,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WareHouseResponse {
+public class StorageResponse {
 	
-	private int wareHouseId;
-	private String name;
-	private int totalCapacityInKg;
-	
-	private AddressResponse addressResponse;
+	private int storageId;
+	private String blockName;
+	private String section;
+	private double capacityInKg;
+	private List<MaterialTypes> materialTypes;
 	
 	
 

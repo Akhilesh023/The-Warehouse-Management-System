@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.jsp.whms.exception.AddressNotFoundByIdException;
 import com.jsp.whms.exception.AdminNotFoundByIdException;
+import com.jsp.whms.exception.ClientNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
 import com.jsp.whms.exception.StorageNotFoundByIdException;
 import com.jsp.whms.exception.WareHouseNotFoundInCityException;
@@ -108,8 +109,15 @@ public class ApplicationExceptionHandler {
 		es.setRootcause("The Required Id Does not exist");
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleClientNotFoundById(ClientNotFoundByIdException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		es.setRootcause("The required Id does not exist");
 		
-		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}
 
 }

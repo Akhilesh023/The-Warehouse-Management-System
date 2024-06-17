@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.jsp.whms.exception.AddressNotFoundByIdException;
 import com.jsp.whms.exception.AdminNotFoundByIdException;
+import com.jsp.whms.exception.ApiKeyOrUsernameNotFoundException;
 import com.jsp.whms.exception.ClientNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
 import com.jsp.whms.exception.StorageNotFoundByIdException;
@@ -126,6 +127,16 @@ public class ApplicationExceptionHandler {
 		ErrorStructure es = new ErrorStructure();
 		es.setMessage(e.getMessage());
 		es.setRootcause("The required Id does not exist");
+		es.setStatus(HttpStatus.NOT_FOUND.value());
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleApiKeyOrUsernameNotFound(ApiKeyOrUsernameNotFoundException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setRootcause("API key or Username is empty");
 		es.setStatus(HttpStatus.NOT_FOUND.value());
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);

@@ -30,7 +30,7 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 	
-	@PostMapping("/clients")
+	@PostMapping("/client/register")
 	public ResponseEntity<ResponseStructure<ApiKeyResponse>> registerClient(@RequestBody ClientRequest clientRequest){
 		return clientService.registerClient(clientRequest);
 	}

@@ -18,6 +18,7 @@ import com.jsp.whms.exception.AdminNotFoundByIdException;
 import com.jsp.whms.exception.ClientNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
 import com.jsp.whms.exception.StorageNotFoundByIdException;
+import com.jsp.whms.exception.StorageTypeNotFoundByIdException;
 import com.jsp.whms.exception.WareHouseNotFoundInCityException;
 import com.jsp.whms.exception.WarehouseNotFoundByIdException;
 
@@ -116,6 +117,16 @@ public class ApplicationExceptionHandler {
 		es.setMessage(e.getMessage());
 		es.setStatus(HttpStatus.NOT_FOUND.value());
 		es.setRootcause("The required Id does not exist");
+		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleStorageTypeNotFoundById(StorageTypeNotFoundByIdException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setRootcause("The required Id does not exist");
+		es.setStatus(HttpStatus.NOT_FOUND.value());
 		
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}

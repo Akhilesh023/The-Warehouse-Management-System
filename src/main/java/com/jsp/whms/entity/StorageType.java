@@ -1,15 +1,12 @@
 package com.jsp.whms.entity;
 
-import java.util.List;
-
-import com.jsp.whms.enums.MaterialTypes;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,24 +16,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Storage {
+@Builder
+public class StorageType {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int storageId;
-	private String blockName;
-	private String section;
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
+	private int storageTypeId;
 	private double capacityInKg;
 	private double lengthInMeters;
 	private double breadthInMeters;
 	private double heightInMeters;
-	private List<MaterialTypes> materialTypes;
-	private double maxAdditionalWeightInKg;
-	private double availableArea;
-	
-	@ManyToOne
-	private WareHouse wareHouse;
-	
-	@ManyToOne
-	private StorageType storageType;
+	private int unitsAvailable;
 
 }

@@ -24,9 +24,9 @@ public class StorageController {
 	@Autowired
 	private StorageService storageService;
 	
-	@PostMapping("/warehouses/{wareHouseId}/storages")
-	public ResponseEntity<SimpleResponseStructure<String>> addStorage(@RequestBody StorageRequest storageRequest, @PathVariable int wareHouseId,@RequestParam("no_of_storage_units") int noOfStorageUnits){
-		return storageService.addStorage(storageRequest,wareHouseId,noOfStorageUnits);
+	@PostMapping("/warehouses/{wareHouseId}/{storageTypeId}/storages")
+	public ResponseEntity<SimpleResponseStructure<String>> addStorage(@RequestBody StorageRequest storageRequest, @PathVariable int wareHouseId,@RequestParam("no_of_storage_units") int noOfStorageUnits,@PathVariable int storageTypeId){
+		return storageService.addStorage(storageRequest,wareHouseId,noOfStorageUnits,storageTypeId);
 	}  
 	
 	@PutMapping("/storages/{storageId}")

@@ -9,7 +9,7 @@ import com.jsp.whms.util.SimpleResponseStructure;
 
 public interface StorageService {
 
-	ResponseEntity<SimpleResponseStructure<String>> addStorage(StorageRequest storageRequest, int wareHouseId, int noOfStorageUnits);
+	ResponseEntity<SimpleResponseStructure<String>> addStorage(StorageRequest storageRequest, int wareHouseId, int noOfStorageUnits, int storageTypeId);
 
 	ResponseEntity<ResponseStructure<StorageResponse>> updateResponse(StorageRequest storageRequest, int storageId);
 

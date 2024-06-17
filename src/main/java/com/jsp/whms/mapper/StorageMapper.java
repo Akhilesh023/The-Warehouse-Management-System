@@ -13,10 +13,10 @@ public class StorageMapper {
 		
 		storage.setBlockName(storageRequest.getBlockName());
 		storage.setSection(storageRequest.getSection());
-		storage.setLengthInMeters(storageRequest.getLengthInMeters());
-		storage.setBreadthInMeters(storageRequest.getBreadthInMeters());
-		storage.setHeightInMeters(storageRequest.getHeightInMeters());
-		storage.setCapacityInKg(storageRequest.getCapacityInKg());
+//		storage.setLengthInMeters(storageRequest.getLengthInMeters());
+//		storage.setBreadthInMeters(storageRequest.getBreadthInMeters());
+//		storage.setHeightInMeters(storageRequest.getHeightInMeters());
+//		storage.setCapacityInKg(storageRequest.getCapacityInKg());
 		storage.setMaterialTypes(storageRequest.getMaterialTypes());
 		
 		return storage;
@@ -26,9 +26,10 @@ public class StorageMapper {
 	public StorageResponse mapToStorageResponse(Storage storage) {
 		
 		return StorageResponse.builder()
+				.storageId(storage.getStorageId())
 				.blockName(storage.getBlockName())
 				.section(storage.getSection())
-				.capacityInKg(storage.getCapacityInKg())
+//				.capacityInKg(storage.getCapacityInKg())
 				.materialTypes(storage.getMaterialTypes())
 				.build();
 	}

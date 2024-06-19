@@ -1,9 +1,12 @@
 package com.jsp.whms.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +28,8 @@ public class Client {
 	private String email;
 	private long contactNumber;
 	private String apiKey;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Inventory> inventories;
 
 }

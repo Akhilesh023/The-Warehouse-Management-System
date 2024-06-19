@@ -18,6 +18,7 @@ import com.jsp.whms.exception.AdminNotFoundByIdException;
 import com.jsp.whms.exception.ApiKeyOrUsernameNotFoundException;
 import com.jsp.whms.exception.ClientNotFoundByIdException;
 import com.jsp.whms.exception.IllegalOperationException;
+import com.jsp.whms.exception.InventoryNotFoundByIdException;
 import com.jsp.whms.exception.StorageNotFoundByIdException;
 import com.jsp.whms.exception.StorageTypeNotFoundByIdException;
 import com.jsp.whms.exception.WareHouseNotFoundInCityException;
@@ -139,6 +140,14 @@ public class ApplicationExceptionHandler {
 		es.setRootcause("API key or Username is empty");
 		es.setStatus(HttpStatus.NOT_FOUND.value());
 		
+		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler
+	public ResponseEntity<ErrorStructure> handleInventoryNotFoundByIdException(InventoryNotFoundByIdException e){
+		ErrorStructure es = new ErrorStructure();
+		es.setMessage(e.getMessage());
+		es.setRootcause("The required id does not exists");
+		es.setStatus(HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<ErrorStructure>(es,HttpStatus.NOT_FOUND);
 	}
 
